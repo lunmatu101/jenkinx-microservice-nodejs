@@ -58,15 +58,16 @@ resources:
   requests:
     cpu: 200m
     memory: 128Mi
-probePath: /
 livenessProbe:
-  initialDelaySeconds: 60
-  periodSeconds: 10
+  probePath: "/health/liveness"
+  initialDelaySeconds: 30
+  periodSeconds: 3
   successThreshold: 1
-  timeoutSeconds: 1
+  timeoutSeconds: 5
 readinessProbe:
+  probePath: "/health/readiness"
   failureThreshold: 1
-  periodSeconds: 10
+  periodSeconds: 3
   successThreshold: 1
   timeoutSeconds: 1
 
