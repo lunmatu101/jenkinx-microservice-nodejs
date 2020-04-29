@@ -48,8 +48,8 @@ pipeline {
           sh "echo \$(jx-release-version) > VERSION"
           sh "jx step tag --version \$(cat VERSION)"
           sh "jx step credential -s npm-token -k file -f /builder/home/.npmrc --optional=true"
-          // sh "npm install"
-          // sh "CI=true DISPLAY=:99 npm test"
+          sh "npm install"
+          sh "CI=true DISPLAY=:99 npm test"
           sh "export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml"
           sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
         }
